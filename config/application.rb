@@ -21,5 +21,6 @@ module WookieBooksRubyEzqubz
     config.autoload_paths << Rails.root.join('lib')
     config.cache_store = :redis_cache_store, { url: 'redis://127.0.0.1:6379/0' }
     config.session_store :redis_store, servers: 'redis://127.0.0.1:6379/0'
+    config.middleware.insert_after ActionDispatch::Callbacks, RequestLogger
   end
 end

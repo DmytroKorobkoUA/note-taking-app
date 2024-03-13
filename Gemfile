@@ -26,6 +26,7 @@ gem 'resque'
 gem 'resque-scheduler'
 gem 'redis'
 gem 'redis-rails'
+gem 'mongo'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

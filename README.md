@@ -5,6 +5,9 @@ This is a test task for creating an API with basic authentication via JWT for ma
 ## Usage
 
 1. **Clone the project code**
+   ```bash
+   git clone https://github.com/DmytroKorobkoUA/note-taking-app.git
+   ```
 2. **Install dependencies:**
     ```bash
     bundle install

@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
 class Note < ApplicationRecord
-  belongs_to :user
-
-  validates :title, :content, presence: true
+ validates :title, :content, presence: true
 
   def self.search(query)
     if query.present?
-      where("title LIKE :query OR content LIKE :query OR users.username LIKE :query", query: "%#{query}%").joins(:user)
+      where("title LIKE :query OR content LIKE :query", query: "%#{query}%")
     else
       all
     end

@@ -29,7 +29,7 @@ RSpec.describe V1::Users::NotesController, type: :request do
 
   describe 'PATCH /v1/users/notes/:id' do
     let(:user) { create :user }
-    let(:note) { create :note, user: user }
+    let(:note) { create :note }
     let(:note_params) {{ title: 'Updated Title', content: 'Updated Note Content'}}
 
     context 'authorized' do
@@ -62,32 +62,17 @@ RSpec.describe V1::Users::NotesController, type: :request do
   describe 'DELETE /v1/users/notes/:note_id/destroy' do
     let(:user) { create :user }
     let(:another_user) { create :user }
-    let!(:note) { create :note, user: user }
-    let!(:another_note) { create :note, user: another_user }
+    let!(:note) { create :note }
 
     context 'authorized' do
-      context 'own note' do
-        it 'removes the note' do
-          post login_v1_auth_path, params: { username: user.username, password: 'StrongPassword' }
+      it 'removes the note' do
+        post login_v1_auth_path, params: { username: user.username, password: 'StrongPassword' }
 
-          delete v1_users_note_path(id: note.id), headers: { 'Authorization' => "Bearer #{json_response[:token]}" }
+        delete v1_users_note_path(id: note.id), headers: { 'Authorization' => "Bearer #{json_response[:token]}" }
 
-          expect(response).to have_http_status(:ok)
-          expect(Note.all.count).to eq(1)
-        end
+        expect(response).to have_http_status(:ok)
+        expect(Note.all.count).to eq(0)
       end
-
-      context 'not own note' do
-        it 'does not removes the note' do
-          post login_v1_auth_path, params: { username: user.username, password: 'StrongPassword' }
-
-          delete v1_users_note_path(id: another_note.id), headers: { 'Authorization' => "Bearer #{json_response[:token]}" }
-
-          expect(response).to have_http_status(:ok)
-          expect(Note.all.count).to eq(2)
-        end
-      end
-
     end
 
     context 'unauthorized' do
@@ -95,7 +80,7 @@ RSpec.describe V1::Users::NotesController, type: :request do
         delete v1_users_note_path(id: note.id)
 
         expect(response).to have_http_status(:unauthorized)
-        expect(Note.all.count).to eq(2)
+        expect(Note.all.count).to eq(1)
       end
     end
   end

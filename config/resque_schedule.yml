@@ -1,0 +1,4 @@
+fetch_notes_job:
+  cron: "*/5 * * * *"  # Run every 5 minutes
+  class: FetchNotesJob
+  queue: fetch_notes_queue

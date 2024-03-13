@@ -5,14 +5,14 @@ class V1::Users::NotesController < V1::AuthenticationController
   before_action :authorize_request, only: [:create, :update, :destroy]
 
   def create
-    @note = @current_user.notes.new(note_params)
+    @note = Note.new(note_params)
     @note.save!
 
     head :ok
   end
 
   def update
-    if @note.user == @current_user && @note.update(note_params)
+    if @note.update(note_params)
       render json: @note
     else
       render json: @note.errors, status: :unprocessable_entity
@@ -20,7 +20,7 @@ class V1::Users::NotesController < V1::AuthenticationController
   end
 
   def destroy
-    @note.destroy if @note.user == @current_user
+    @note.destroy!
 
     head :ok
   end

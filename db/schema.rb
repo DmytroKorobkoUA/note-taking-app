@@ -15,10 +15,8 @@ ActiveRecord::Schema.define(version: 2024_03_12_115755) do
   create_table "notes", force: :cascade do |t|
     t.string "title", null: false
     t.text "content", null: false
-    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

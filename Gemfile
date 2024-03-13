@@ -5,8 +5,8 @@ ruby '3.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.7', '>= 6.1.7.7'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
+# Use mysql2 as the database for Active Record
+gem 'mysql2'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
@@ -24,6 +24,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
 gem 'resque'
 gem 'resque-scheduler'
+gem 'redis'
+gem 'redis-rails'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
